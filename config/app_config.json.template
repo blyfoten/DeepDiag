@@ -1,0 +1,24 @@
+{
+  "connection": {
+    "default_baudrate": 38400,
+    "timeout": 3.0,
+    "auto_reconnect": true,
+    "reconnect_delay": 2.0
+  },
+  "gui": {
+    "theme": "dark",
+    "window_width": 1280,
+    "window_height": 720,
+    "default_refresh_rate": 10
+  },
+  "logging": {
+    "auto_start": false,
+    "default_pids": [12, 13, 5, 17]
+  },
+  "elm327": {
+    "default_protocol": "0",
+    "echo": false,
+    "headers": false,
+    "spaces": true
+  }
+}
