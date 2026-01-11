@@ -35,6 +35,18 @@ class ConnectionWindow:
             modal=True
         ):
             dpg.add_text("Available Devices:")
+
+            # Info about Bluetooth ports
+            with dpg.collapsing_header(label="ℹ Bluetooth Port Info", default_open=False):
+                dpg.add_text(
+                    "Bluetooth adapters create 2 COM ports:\n"
+                    "• Outgoing port (green) - Use this one for ELM327\n"
+                    "• Incoming port (gray) - Not used, can ignore\n\n"
+                    "Select the green 'Outgoing' port below.",
+                    wrap=550,
+                    color=(200, 200, 200)
+                )
+
             dpg.add_spacer(height=5)
 
             # Device list
@@ -110,12 +122,26 @@ class ConnectionWindow:
                 ):
                     dpg.add_table_column(label="Port")
                     dpg.add_table_column(label="Description")
+                    dpg.add_table_column(label="Type")
                     dpg.add_table_column(label="Select")
 
                     for device in self.devices:
+                        # Check if this is a Bluetooth port pair
+                        is_outgoing = self.app.bt_manager.is_likely_outgoing_port(device['port'])
+
+                        port_type = ""
+                        port_color = (255, 255, 255)  # White
+                        if is_outgoing is True:
+                            port_type = "✓ Outgoing (USE)"
+                            port_color = (100, 255, 100)  # Green
+                        elif is_outgoing is False:
+                            port_type = "✗ Incoming (SKIP)"
+                            port_color = (150, 150, 150)  # Gray
+
                         with dpg.table_row():
-                            dpg.add_text(device['port'])
+                            dpg.add_text(device['port'], color=port_color)
                             dpg.add_text(device['description'])
+                            dpg.add_text(port_type, color=port_color)
                             dpg.add_radio_button(
                                 items=[" "],
                                 callback=lambda s, a, u: self._select_device(u),

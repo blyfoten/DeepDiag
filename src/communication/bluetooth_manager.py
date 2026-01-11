@@ -81,3 +81,53 @@ class BluetoothManager:
                 return device
 
         return None
+
+    def get_bluetooth_port_pairs(self) -> List[tuple]:
+        """
+        Identify Bluetooth port pairs (outgoing/incoming).
+
+        Returns:
+            List of tuples: [(outgoing_port, incoming_port), ...]
+        """
+        if not self.devices:
+            self.scan_devices()
+
+        # Group Bluetooth ports by description
+        bluetooth_ports = {}
+        for device in self.devices:
+            desc = device['description'].lower()
+            if 'bluetooth' in desc or 'bth' in desc:
+                base_desc = device['description']
+                if base_desc not in bluetooth_ports:
+                    bluetooth_ports[base_desc] = []
+                bluetooth_ports[base_desc].append(device['port'])
+
+        # Find pairs (usually sequential COM ports)
+        pairs = []
+        for ports in bluetooth_ports.values():
+            if len(ports) == 2:
+                # Lower number is typically outgoing
+                ports.sort()
+                pairs.append((ports[0], ports[1]))
+
+        return pairs
+
+    def is_likely_outgoing_port(self, port_name: str) -> Optional[bool]:
+        """
+        Determine if a port is likely the outgoing Bluetooth port.
+
+        Args:
+            port_name: Port name to check
+
+        Returns:
+            True if likely outgoing, False if likely incoming, None if unknown
+        """
+        pairs = self.get_bluetooth_port_pairs()
+
+        for outgoing, incoming in pairs:
+            if port_name == outgoing:
+                return True
+            elif port_name == incoming:
+                return False
+
+        return None
