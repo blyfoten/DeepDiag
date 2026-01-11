@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+*.egg
+*.egg-info/
+.Python
+dist/
+build/
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+.virtualenv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+*.sublime-project
+*.sublime-workspace
+
+# PyCharm
+.idea/
+
+# VS Code
+.vscode/
+
+# Logs and data
+logs/
+*.log
+*.csv
+
+# Config files with sensitive data
+config/app_config.json
+.env
+*.key
+api_keys.txt
+
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Claude Code
+.claude/
+
+# Temporary files
+*.tmp
+*.bak
+*.cache
+~*
+
+# pytest
+.pytest_cache/
+.coverage
+htmlcov/
+
+# mypy
+.mypy_cache/
+.dmypy.json
+dmypy.json
+
+# Database files (if any)
+*.db
+*.sqlite
+*.sqlite3

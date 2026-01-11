@@ -1,0 +1,21 @@
+{
+  "layouts": [
+    {
+      "name": "Default",
+      "widgets": [
+        {
+          "type": "gauge",
+          "pid": 12,
+          "position": [0, 0],
+          "size": [200, 200]
+        },
+        {
+          "type": "gauge",
+          "pid": 13,
+          "position": [220, 0],
+          "size": [200, 200]
+        }
+      ]
+    }
+  ]
+}

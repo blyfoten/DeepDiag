@@ -1,0 +1,15 @@
+{
+  "pids": [
+    {
+      "mode": 1,
+      "pid": 240,
+      "name": "Custom_Example",
+      "description": "Example custom PID",
+      "unit": "units",
+      "formula": "A",
+      "num_bytes": 1,
+      "min_val": 0,
+      "max_val": 255
+    }
+  ]
+}
